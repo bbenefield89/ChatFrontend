@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 class ChatMessagesList extends Component {
   constructor(props) {
@@ -18,14 +19,35 @@ class ChatMessagesList extends Component {
     })
   }
   
+  setMessagesState = messagesData => {
+    this.setState({
+      messages: [
+        ...this.state.messages,
+        ...messagesData
+      ]
+    })
+  }
+  
+  componentDidMount() {
+    const url = 'http://localhost:3001/api/messages'
+
+    axios(url)
+      .then(({ data }) => {
+        this.setMessagesState(data)
+      })
+      .catch(err => console.log(err))
+  }
+  
   render() {
     return (
       <ul>
-        {this.state.messages.map((message, index) => (
-          <li key={ message.id }>
-            { message.message }
-          </li>
-        ))}
+        {
+          this.state.messages.map((message, index) => (
+            <li key={ message.id }>
+              { message.message }
+            </li>
+          ))
+        }
       </ul>
     )
   }
