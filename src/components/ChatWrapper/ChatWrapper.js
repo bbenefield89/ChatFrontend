@@ -1,16 +1,15 @@
 import React from 'react'
 
+import ChatForm from './ChatForm'
+import ChatMessagesList from './ChatMessagesList'
+
 const ChatWrapper = props => {
   return (
     <React.Fragment>
-      <ul id='messsages' />
-      
-      <form action=''>
-        <input id='message_bar' autoComplete='off' />
-        <button>Send</button>
-      </form>
+      <ChatMessagesList socket={ props.socket } />
+      <ChatForm socket={ props.socket } />
     </React.Fragment>
   );
 }
  
-export default ChatWrapper;
+export default ChatWrapper

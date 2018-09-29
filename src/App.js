@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
+import io from 'socket.io-client'
 
 import ChatWrapper from './components/ChatWrapper/ChatWrapper'
 
-import './App.css';
+import './App.css'
+// import logo from './logo.svg';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+    this.socket = io('http://localhost:3001')
+    
+    this.socket.on('RESP', data => console.log(data))
+  }
+  
+  sendMessage = () => {
+    this.socket.emit('SEND', 'SENDING MESSAGE')
+  }
+  
   render() {
     return (
       <div className="App">
-        <ChatWrapper />
+        <ChatWrapper socket={ this.socket } />
       </div>
     );
   }
 }
 
-export default App;
+export default App
