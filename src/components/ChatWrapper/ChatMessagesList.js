@@ -6,8 +6,15 @@ class ChatMessagesList extends Component {
     this.state = {
       messages: []
     }
-    this.props.socket.on('RESP CHAT MESSAGE', message => {
-      this.setState({ messages: [ ...this.state.messages, message ] })
+    
+    this.props.socket.on('RESP CHAT MESSAGE', messageData => {
+      console.log(messageData)
+      this.setState({
+        messages: [
+          ...this.state.messages,
+          messageData
+        ]
+      })
     })
   }
   
@@ -15,8 +22,8 @@ class ChatMessagesList extends Component {
     return (
       <ul>
         {this.state.messages.map((message, index) => (
-          <li key={ index * Date.now() }>
-            { message }
+          <li key={ message.id }>
+            { message.message }
           </li>
         ))}
       </ul>
