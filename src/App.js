@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.socket = io('http://localhost:3001')
+    this.socket = io('https://evening-headland-92725.herokuapp.com/')
     
     this.socket.on('RESP', data => console.log(data))
   }

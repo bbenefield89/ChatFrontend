@@ -29,7 +29,7 @@ class ChatMessagesList extends Component {
   }
   
   componentDidMount() {
-    const url = 'http://localhost:3001/api/messages'
+    const url = 'https://evening-headland-92725.herokuapp.com/api/messages'
 
     axios(url)
       .then(({ data }) => {
